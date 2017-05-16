@@ -100,6 +100,21 @@ Mozilla.TrafficCop.prototype.init = function() {
             if (redirectUrl) {
                 // if we get a variation, send the user and store a cookie
                 if (redirectUrl !== Mozilla.TrafficCop.noVariationCookieValue) {
+                    // Store the original referrer for use after redirect takes place so analytics can
+                    // keep track of where visitors are coming from.
+
+                    // Traffic Cop does nothing with this referrer - it's up to the implementing site to
+                    // send it on to an analytics platform (or whatever).
+                    if (document.referrer !== '') {
+                        Mozilla.Cookies.setItem('mozilla-traffic-cop-original-referrer', document.referrer, this.cookieExpiresDate());
+                    }
+
+                    // TODO:
+                    // allow referrer cookie to be enabled via config, and turn off by default?
+                    // allow configuration of referrer cookie name?
+                    // clear referrer cookie if !redirectUrl
+
+
                     Mozilla.Cookies.setItem(this.id, this.redirectVariation, this.cookieExpiresDate());
                     window.location.href = redirectUrl;
                 }
@@ -107,6 +122,9 @@ Mozilla.TrafficCop.prototype.init = function() {
                 // if no variation, set a cookie so user isn't re-entered into
                 // the dice roll on next page load
                 Mozilla.Cookies.setItem(this.id, Mozilla.TrafficCop.noVariationCookieValue, this.cookieExpiresDate());
+
+                // TODO: clear referrer cookie just in case
+                Mozilla.Cookies.removeItem('mozilla-traffic-cop-original-referrer');
             }
         }
     }

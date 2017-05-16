@@ -1452,6 +1452,13 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/experiment_firefox_family-bundle.js',
     },
+    'experiment_firefox_landing': {
+        'source_filenames': (
+            'js/base/mozilla-traffic-cop.js',
+            'js/firefox/experiment-firefox-landing.js',
+        ),
+        'output_filename': 'js/experiment_firefox_landing-bundle.js',
+    },
     'firefox_faq': {
         'source_filenames': (
             'js/base/mozilla-accordion.js',
