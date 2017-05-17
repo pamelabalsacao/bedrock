@@ -24,16 +24,19 @@
         if (trafficCopOriginalReferrer) {
             setTimeout(function() {
                 console.log('trying to set referrer to ' + trafficCopOriginalReferrer);
-                if (window.ga) {
-                    console.log('ga is here! we are setting the referrer!');
-                    window.ga('set', 'referrer', trafficCopOriginalReferrer);
-                } else {
-                    console.log('ga is not ready :(');
-                }
+                //if (window.dataLayer) {
+                    //console.log('ga is here! we are setting the referrer!');
+                    //window.ga('set', 'referrer', trafficCopOriginalReferrer);
+                    window.dataLayer = [{
+                        'Referrer': trafficCopOriginalReferrer
+                    }];
+                //} else {
+                //    console.log('ga is not ready :(');
+                //}
 
                 // referrer shouldn't persist, right?
                 Mozilla.Cookies.removeItem('mozilla-traffic-cop-original-referrer');
-            }, 500);
+            }, 1000);
         }
     }
 })(window.Mozilla);
