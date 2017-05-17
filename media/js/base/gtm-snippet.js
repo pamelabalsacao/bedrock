@@ -28,7 +28,7 @@
                     //console.log('ga is here! we are setting the referrer!');
                     //window.ga('set', 'referrer', trafficCopOriginalReferrer);
                     window.dataLayer = [{
-                        'Referrer': trafficCopOriginalReferrer
+                        'customReferrer': trafficCopOriginalReferrer
                     }];
                 //} else {
                 //    console.log('ga is not ready :(');
