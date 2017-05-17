@@ -11,32 +11,26 @@
     // If doNotTrack is not enabled, it is ok to add GTM
     // @see https://bugzilla.mozilla.org/show_bug.cgi?id=1217896 for more details
     if (typeof window._dntEnabled === 'function' && !window._dntEnabled() && GTM_CONTAINER_ID) {
-        (function(w,d,s,l,i,j,f,dl,k,q){
-            w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});f=d.getElementsByTagName(s)[0];
-            k=i.length;q='//www.googletagmanager.com/gtm.js?id=@&l='+(l||'dataLayer');
-            while(k--){j=d.createElement(s);j.async=!0;j.src=q.replace('@',i[k]);f.parentNode.insertBefore(j,f);}
-        }(window,document,'script','dataLayer',[GTM_CONTAINER_ID]));
-
         // check for an original referrer set by traffic cop
         trafficCopOriginalReferrer = Mozilla.Cookies.getItem('mozilla-traffic-cop-original-referrer');
 
         // if original referrer exists, pass it to ga
         if (trafficCopOriginalReferrer) {
-            setTimeout(function() {
-                console.log('trying to set referrer to ' + trafficCopOriginalReferrer);
-                //if (window.dataLayer) {
-                    //console.log('ga is here! we are setting the referrer!');
-                    //window.ga('set', 'referrer', trafficCopOriginalReferrer);
-                    window.dataLayer = [{
-                        'customReferrer': trafficCopOriginalReferrer
-                    }];
-                //} else {
-                //    console.log('ga is not ready :(');
-                //}
+            console.log('trying to set referrer to ' + trafficCopOriginalReferrer);
 
-                // referrer shouldn't persist, right?
-                Mozilla.Cookies.removeItem('mozilla-traffic-cop-original-referrer');
-            }, 1000);
+            // this must happen prior to the GTM snippet
+            window.dataLayer = [{
+                'customReferrer': trafficCopOriginalReferrer
+            }];
+
+            // referrer shouldn't persist, right?
+            Mozilla.Cookies.removeItem('mozilla-traffic-cop-original-referrer');
         }
+
+        (function(w,d,s,l,i,j,f,dl,k,q){
+            w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});f=d.getElementsByTagName(s)[0];
+            k=i.length;q='//www.googletagmanager.com/gtm.js?id=@&l='+(l||'dataLayer');
+            while(k--){j=d.createElement(s);j.async=!0;j.src=q.replace('@',i[k]);f.parentNode.insertBefore(j,f);}
+        }(window,document,'script','dataLayer',[GTM_CONTAINER_ID]));
     }
 })(window.Mozilla);
