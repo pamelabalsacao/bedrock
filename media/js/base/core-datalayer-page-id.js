@@ -22,11 +22,28 @@ if (typeof Mozilla == 'undefined') {
         return pageId ? pageId : pathName.replace(/^(\/\w{2}\-\w{2}\/|\/\w{2,3}\/)/, '/');
     };
 
-    // Push page ID into dataLayer so it's ready when GTM container loads.
-    dataLayer.push({
+    var dataObj = {
         'event': 'page-id-loaded',
         'pageId': Analytics.getPageId()
-    });
+    };
+
+    // check for an original referrer set by traffic cop
+    var trafficCopOriginalReferrer = Mozilla.Cookies.getItem('mozilla-traffic-cop-original-referrer');
+
+    // if original referrer exists, pass it to ga
+    if (trafficCopOriginalReferrer) {
+        console.log('trying to set referrer to ' + trafficCopOriginalReferrer);
+
+        dataObj.customReferrer = trafficCopOriginalReferrer;
+
+        // referrer shouldn't persist, right?
+        Mozilla.Cookies.removeItem('mozilla-traffic-cop-original-referrer');
+    }
+
+    console.log(dataObj);
+
+    // Push page ID into dataLayer so it's ready when GTM container loads.
+    dataLayer.push(dataObj);
 
     Mozilla.Analytics = Analytics;
 })();
