@@ -105,9 +105,10 @@ Mozilla.TrafficCop.prototype.init = function() {
 
                     // Traffic Cop does nothing with this referrer - it's up to the implementing site to
                     // send it on to an analytics platform (or whatever).
-                    if (document.referrer !== '') {
-                        Mozilla.Cookies.setItem('mozilla-traffic-cop-original-referrer', document.referrer, this.cookieExpiresDate());
-                    }
+
+                    // We must set the cookie to some value if document.referrer is empty
+                    // to ensure consumer of the cookie knows a redirect happened.
+                    Mozilla.Cookies.setItem('mozilla-traffic-cop-original-referrer', document.referrer || 'direct', this.cookieExpiresDate());
 
                     // TODO:
                     // allow referrer cookie to be enabled via config, and turn off by default?

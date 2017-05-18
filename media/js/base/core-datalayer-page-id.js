@@ -24,8 +24,7 @@ if (typeof Mozilla == 'undefined') {
 
     var dataObj = {
         'event': 'page-id-loaded',
-        'pageId': Analytics.getPageId(),
-        'customReferrer': 'direct'
+        'pageId': Analytics.getPageId()
     };
 
     // check for an original referrer set by traffic cop
@@ -33,8 +32,10 @@ if (typeof Mozilla == 'undefined') {
 
     // if original referrer exists, pass it to ga
     if (trafficCopOriginalReferrer) {
-        console.log('trying to set referrer to ' + trafficCopOriginalReferrer);
+        console.log('trying to set referrer...');
 
+        // Traffic Cop sets the referrer to 'direct' if document.referer is empty
+        // prior to the redirect.
         dataObj.customReferrer = trafficCopOriginalReferrer;
 
         // referrer shouldn't persist, right?
