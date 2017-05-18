@@ -24,7 +24,8 @@ if (typeof Mozilla == 'undefined') {
 
     var dataObj = {
         'event': 'page-id-loaded',
-        'pageId': Analytics.getPageId()
+        'pageId': Analytics.getPageId(),
+        'customReferrer': 'direct'
     };
 
     // check for an original referrer set by traffic cop
