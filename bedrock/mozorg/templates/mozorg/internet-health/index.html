@@ -1,0 +1,257 @@
+{# This Source Code Form is subject to the terms of the Mozilla Public
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/. -#}
+
+{% extends "base-pebbles.html" %}
+
+{% block page_title %}
+  {{ _('Internet Health') }}
+{% endblock %}
+
+{% block page_desc %}
+  {{ _('The healthier the Internet is, the more it benefits everyone. We can all be a part of keeping the Internet open, safe and accessible.') }}
+{% endblock %}
+
+{% block page_image %}{{ static('img/mozorg/internet-health/header-small.jpg') }}{% endblock %}
+
+{% block body_id %}internet-health{% endblock %}
+{% block body_class %}{% endblock %}
+{% block body_attrs %}{{ super() }} data-global-nav-current-link="internet-health"{% endblock %}
+
+{% block page_css %}
+  {% stylesheet 'internet-health-hub' %}
+{% endblock %}
+
+{% block site_header %}
+  {% if LANG.startswith('en-') %}
+    {% include 'includes/global-nav.html' %}
+  {% else %}
+    {% include 'mozorg/home/includes/nav.html' %}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+{% include 'mozorg/internet-health/includes/sub-nav.html' %}
+
+<main role="main">
+  <header class="header-intro">
+    <div class="content">
+      <div class="header-container">
+        <div class="header-content">
+          <h1><span>{{ _('Internet Health') }}</span></h1>
+          <p class="tagline">{{ _('Keeping the internet safe, healthy, and open') }}</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section issues">
+    <div class="content">
+
+      <div class="cards-container is-five-cards">
+        <section class="card image-card is-featured">
+          <a href="{{ url('mozorg.internet-health.web-literacy') }}" class="card-image" data-link-type="link" data-link-position="Issue - Web Literacy" data-link-name="Citizens of the internet">
+            <img src="{{ static('img/mozorg/internet-health/hub/image-card.jpg') }}" alt="">
+          </a>
+          <div class="card-label"><strong>{{ _('Web Literacy') }}</strong></div>
+          <div class="card-content">
+            <h2 class="card-title">{{ _('Citizens of the internet') }}</h2>
+            <p>
+            {% trans %}
+              It’s time to wake up! You’re the creators of today’s Internet, not platforms.
+              Learn how to protect your creativity, privacy, and independence online.
+            {% endtrans %}
+            </p>
+            <p class="card-cta">
+              <a href="{{ url('mozorg.internet-health.web-literacy') }}" class="cta-link" data-link-type="link" data-link-position="Issue - Web Literacy" data-link-name="Citizens of the internet">
+                {{ _('Check out Web Literacy') }}
+              </a>
+            </p>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-label"><strong>{{ _('Privacy &amp; Security') }}</strong></div>
+          <div class="card-content">
+            <h2 class="card-title">{{ _('Internet’s got trust issues') }}</h2>
+            <p class="card-cta">
+              <a href="{{ url('mozorg.internet-health.privacy-security') }}" class="cta-link" data-link-type="link" data-link-position="Issue - Privacy & Security" data-link-name="Internet’s got trust issues">
+                {{ ('Help build a safer Internet') }}
+              </a>
+            </p>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-label"><strong>{{ _('Digital Inclusion') }}</strong></div>
+          <div class="card-content">
+            <h2 class="card-title">{{ _('Let’s internet better, together') }}</h2>
+            <p class="card-cta">
+              <a href="{{ url('mozorg.internet-health.digital-inclusion') }}" class="cta-link" data-link-type="link" data-link-position="Issue - Digital Inclusion" data-link-name="Let’s internet better, together">
+                {{ _('More about Digital Inclusion') }}
+              </a>
+            </p>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-label"><strong>{{ _('Decentralization') }}</strong></div>
+          <div class="card-content">
+            <h2 class="card-title">{{ _('No more control issues') }}</h2>
+            <p class="card-cta">
+              <a href="{{ url('mozorg.internet-health.decentralization') }}" class="cta-link" data-link-type="link" data-link-position="Issue - Decentralization" data-link-name="No more control issues">
+                {{ _('Browse independently with Firefox') }}
+              </a>
+            </p>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-label"><strong>{{ _('Openness') }}</strong></div>
+          <div class="card-content">
+            <h2 class="card-title">{{ _('We’re open for innovation') }}</h2>
+            <p class="card-cta">
+              <a href="{{ url('mozorg.internet-health.open-innovation') }}" class="cta-link" data-link-type="link" data-link-position="Issue - Openness" data-link-name="We’re open for innovation">
+                {{ _('Browse independently with Firefox') }}
+              </a>
+            </p>
+          </div>
+        </section>
+      </div> {#--/.cards-container--#}
+
+    </div> {#--/.content--#}
+  </section> {#--/#issues--#}
+
+  <section class="podcast">
+    <div class="content">
+      <div class="card image-card">
+        <h2 class="section-title"><span>{{ _('Podcast') }}</span></h2>
+
+        <div class="card-content-wrapper">
+          <div class="card-content">
+            <h3 class="card-heading">{{ _('The ultimate internet health podcast') }}</h3>
+
+            <p>
+            {% trans %}
+              Listen up! We’re chatting all things Internet Health and how you can get involved.
+            {% endtrans %}
+            </p>
+
+            <a href="#TODO" class="cta-link" data-link-name="Check out our podcast" data-link-type="link" data-link-position="Podcast">
+              {{ _('Check out our podcast') }}
+            </a>
+          </div>
+        </div> {#--/.card-content-wrapper--#}
+      </div>
+    </div> {#--/.content--#}
+  </section> {#--/#podcast--#}
+
+  {% include 'firefox/includes/hub/news-feed.html' %}
+
+  <section class="report">
+    <div class="content">
+      <div class="card image-card">
+        <h2 class="section-title"><span>{{ _('Internet Health Report') }}</span></h2>
+
+        <div class="card-content-wrapper">
+          <div class="card-content">
+            <h3 class="card-heading">{{ _('All about Internet Health') }}</h3>
+
+            <p>
+            {% trans %}
+              The Internet got a full check-up and  the results are in.
+            {% endtrans %}
+            </p>
+
+            <a href="https://internethealthreport.org" class="cta-link" data-link-name="Read the Internet Health Report" data-link-type="link" data-link-position="Internet Health Report">
+              {{ _('Read the Internet Health Report') }}
+            </a>
+          </div>
+        </div> {#--/.card-content-wrapper--#}
+      </div>
+    </div> {#--/.content--#}
+  </section> {#--/#podcast--#}
+
+  <aside class="outro">
+    <div class="content">
+      <section class="outro-item outro-item-newsletter">
+        <div class="outro-item-detail">
+          <h2>{{ _('Something about the newsletter') }}</h2>
+          <p class="tagline">{{ _('Quos est amet repellat vellapo consequatur rerum soluta.') }}</p>
+          {{ email_newsletter_form(newsletters='mozilla-foundation', include_title=False, spinner_color='#000', button_class='button-hollow light') }}
+        </div>
+      </section>
+    </div> {#--/.content--#}
+  </aside> {#--/.outro--#}
+
+  <section class="videos">
+    <div class="content">
+      <h2 class="section-title"><span>{{ _('Videos') }}</span></h2>
+      <ul class="video-list">
+        <li class="video-list-item">
+          <a href="https://www.youtube.com/watch?v=CEjXEcNeekk">
+            <img src="{{ static('img/mozorg/internet-health/hub/video-thumbnail.jpg') }}" alt="">
+          </a>
+          <h3>{{ _('Lorem ipsum dolor sit amet') }}</h3>
+          <p>
+          {% trans %}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua.
+          {% endtrans %}
+          </p>
+          <a href="https://www.youtube.com/watch?v=CEjXEcNeekk" class="cta-link">
+            {{ _('Learn more') }}
+          </a>
+        </li>
+        <li class="video-list-item">
+          <a href="https://www.youtube.com/watch?v=CEjXEcNeekk">
+            <img src="{{ static('img/mozorg/internet-health/hub/video-thumbnail.jpg') }}" alt="">
+          </a>
+          <h3>{{ _('Lorem ipsum dolor sit amet') }}</h3>
+          <p>
+          {% trans %}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua.
+          {% endtrans %}
+          </p>
+          <a href="https://www.youtube.com/watch?v=CEjXEcNeekk" class="cta-link">
+            {{ _('Learn more') }}
+          </a>
+        </li>
+        <li class="video-list-item">
+          <a href="https://www.youtube.com/watch?v=CEjXEcNeekk">
+            <img src="{{ static('img/mozorg/internet-health/hub/video-thumbnail.jpg') }}" alt="">
+          </a>
+          <h3>{{ _('Lorem ipsum dolor sit amet') }}</h3>
+          <p>
+          {% trans %}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua.
+          {% endtrans %}
+          </p>
+          <a href="https://www.youtube.com/watch?v=CEjXEcNeekk" class="cta-link">
+            {{ _('Learn more') }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+{% endblock %}
+
+{% block email_form %}{% endblock %}
+
+{% block site_footer %}
+  {% with footer_class='dark' %}
+    {% if LANG.startswith('en-') %}
+      {% include 'includes/site-footer-new.html' %}
+    {% else %}
+      {% include 'includes/site-footer.html' %}
+    {% endif %}
+  {% endwith %}
+{% endblock %}
+
+{% block js %}
+  {% javascript 'internet-health-hub' %}
+{% endblock %}

@@ -1,0 +1,457 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+@import '../../pebbles/includes/lib';
+@import '../../pebbles/components/newsletter';
+@import '../../hubs/sections';
+@import '../../hubs/sub-nav';
+@import '../../hubs/buttons';
+@import '../../hubs/cta-link';
+@import '../../firefox/hub/news-feed';
+@import '../../firefox/hub/outro';
+
+main {
+    @include font-size(20px);
+    @include zilla-slab;
+
+    .content:before {
+        @include gradient-horizontal($start-color: #b1f5f5, $end-color: #00a6d6);
+        content: '';
+        display: block;
+        height: 6px;
+        margin: 0 0 25px;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+// Common elements
+
+.section-title {
+    @include font-size(24px);
+    margin: 0 0 20px;
+
+    span {
+        @include box-decoration-break(clone);
+        background-color: #000;
+        color: #fff;
+        padding: 0 5px 0 60px;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+// Page header
+
+.header-intro {
+
+    h1 {
+        color: #fff;
+        line-height: 1.3;
+
+        span {
+            @include box-decoration-break(clone);
+            background: #000;
+        }
+    }
+
+    .tagline {
+        @include font-size-level3;
+        color: $color-text-secondary;
+        font-weight: bold;
+        line-height: 1.2;
+        margin-bottom: 0;
+    }
+
+    .content:before {
+        height: 10px;
+    }
+
+    @media #{$mq-tablet} {
+
+        .header-container {
+            @include clearfix;
+        }
+
+        .header-content {
+            @include span(6);
+            padding-left: 0;
+        }
+    }
+
+    @media #{$mq-desktop} {
+        h1 {
+            @include font-size(72px);
+        }
+
+        .tagline {
+            @include font-size(32px);
+        }
+
+        .header-content {
+            @include span(8);
+            padding-left: 0;
+        }
+    }
+
+    @media #{$mq-desktop-wide} {
+        h1 {
+            @include font-size(95px);
+        }
+
+        .tagline {
+            @include font-size(48px);
+        }
+
+        .header-content {
+            @include span(9);
+            padding-left: 0;
+        }
+    }
+}
+
+.issues .content:before {
+    content: none;
+}
+
+.cards-container {
+    .card {
+        @include clearfix;
+        padding: 20px 0;
+        position: relative;
+    }
+
+    .card-content {
+        &> a:link,
+        &> a:visited {
+            text-decoration: none;
+
+            h2 {
+                @include transition(color .1s ease-in-out);
+                color: $color-text-primary;
+            }
+        }
+
+        &> a:hover,
+        &> a:active,
+        &> a:focus {
+            h2 {
+                @include transition(color .1s ease-in-out);
+                color: #9C432A;
+            }
+        }
+    }
+
+    // (Optional) highlighted label at the top of a card
+    .card-label {
+        @include font-size-level4;
+        line-height: 1.1;
+        margin: 0 0 20px;
+
+        strong {
+            background: #000;
+            color: #fff;
+            padding: 0 5px 0 40px;
+        }
+    }
+
+    .card-title {
+        @include font-size-level2;
+    }
+
+    // Some cards have an image. Used with .card
+    .image-card {
+        .card-label {
+            left: 0;
+            position: absolute;
+            top: 80px;
+            z-index: 2;
+
+            strong {
+                background: #fff;
+                color: #000;
+            }
+        }
+
+        .card-image {
+            height: 240px;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .card-content {
+            background-color: #fff;
+            margin: -160px 40px 0 0;
+            padding: 20px 40px;
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    @media #{$mq-tablet} {
+        .card-cta {
+            width: 60%;
+        }
+
+        .image-card {
+            padding-left: 300px;
+
+            .card-label {
+                top: 60px;
+            }
+
+            .card-content {
+                padding: 0;
+                margin: 0;
+            }
+
+            .card-image {
+                float: left;
+                margin: 0 0 0 -300px;
+                overflow: hidden;
+                position: relative;
+                text-align: center;
+                width: 260px;
+
+                img {
+                    display: block;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+
+    @media #{$mq-desktop} {
+        .image-card {
+            padding-left: 460px;
+
+            .card-image {
+                margin-left: -460px;
+                width: 420px;
+                height: 220px;
+            }
+
+            .card-content {
+                margin: 0;
+            }
+        }
+
+        &.is-five-cards {
+            .card {
+                @include border-box;
+                border-bottom: 0;
+                border-top: 4px solid #000;
+                float: right;
+                width: 49%;
+
+                &.is-featured {
+                    float: left;
+                }
+            }
+
+            .card-content {
+                padding: 20px 40px;
+            }
+
+            .card-cta {
+                width: auto;
+            }
+
+            .image-card {
+                border-top: 0;
+                padding: 0;
+
+                .card-image {
+                    width: 100%;
+                    height: auto;
+                    margin-left: 0;
+                    float: none;
+                }
+
+                .card-content {
+                    padding-top: 40px;
+                    margin-right: 80px;
+                    margin-top: -200px;
+                }
+            }
+        }
+    }
+
+    @media #{$mq-desktop-wide} {
+        .card-content {
+            max-width: 34em;
+        }
+    }
+}
+
+// Alternative grid layout when there are three cards
+@supports (display: grid) {
+    .cards-container.is-five-cards {
+
+        @media #{$mq-desktop} {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(4, min-content);
+            grid-gap: 20px;
+
+            .card {
+                float: none;
+                width: auto;
+            }
+
+            .image-card {
+                border-top: 0;
+                padding: 0;
+                display: grid;
+                grid-template-rows: minmax(200px, 30%) min-content min-content;
+
+                .card-content {
+                    background: #fff;
+                    margin: 0 80px 0 0;
+                    grid-row: 3;
+                    grid-column: 1;
+                    z-index: 2;
+                }
+
+                .card-image {
+                    width: auto;
+                    max-height: 80%;
+                    height: auto;
+                    float: none;
+                    margin: 0;
+                    grid-row: 1 / span 3;
+                    grid-column: 1;
+                    z-index: 1;
+                }
+
+                .card-label {
+                    position: static;
+                    grid-row: 2;
+                    grid-column: 1;
+                    z-index: 2;
+                }
+            }
+
+            // Featured card takes the left side
+            .image-card.is-featured {
+                grid-column: 1;
+                grid-row: 1 / span 4;
+
+                .card-content {
+                    padding-top: 40px;
+                }
+            }
+        }
+
+        @media #{$mq-desktop-wide} {
+            .image-card {
+                grid-template-rows: minmax(260px, 40%) min-content min-content;
+            }
+        }
+    }
+}
+
+.report,
+.podcast {
+    .card {
+        padding: 20px 0 40px;
+    }
+
+    .image-card {
+        .card-content-wrapper {
+            background-position: top left;
+            background-repeat: no-repeat;
+            padding-top: 120px;
+        }
+
+        .card-content {
+            background: #fff;
+            margin-right: 20px;
+            padding: 20px;
+        }
+
+        @media #{$mq-tablet} {
+            .card-content {
+                margin-right: auto;
+                padding-bottom: 20px * 3;
+                padding-right: 20px * 2;
+                padding-top: 60px;
+                width: 40%;
+            }
+        }
+    }
+}
+
+.podcast {
+    .card-content-wrapper {
+        background: url('/media/img/mozorg/internet-health/hub/podcast-image.jpg') top left no-repeat;
+    }
+}
+
+.report {
+    .card-content-wrapper {
+        background: url('/media/img/mozorg/internet-health/hub/health-report-image.jpg') top left no-repeat;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+// videos
+
+.video-list {
+    @media #{$mq-phone-wide} {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.video-list-item {
+    padding-bottom: 20px;
+
+    @media #{$mq-tablet} {
+        width: 30%;
+        margin-right: 3%;
+    }
+
+    &:last-child {
+        padding-bottom: 0;
+    }
+
+    h3 {
+        margin-bottom: 10px;
+    }
+
+    small {
+        display: block;
+        font-style: italic;
+        margin-bottom: 20px;
+    }
+
+    img {
+        margin-bottom: 20px;
+        max-width: 420px;
+        width: 100%;
+    }
+}
+
+@supports(display: grid) {
+    .video-list {
+        @media #{$mq-phone-wide} {
+            display: grid;
+            grid-gap: 40px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media #{$mq-desktop} {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .video-list-item {
+        @media #{$mq-tablet} {
+            width: auto;
+            margin: 0;
+        }
+    }
+}
